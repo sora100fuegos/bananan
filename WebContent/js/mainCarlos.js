@@ -137,7 +137,20 @@ $(document).ready(function() {//Entra hasta que la pagina se cargó
 						//alert("Acceso correcto");
 						 alert('upring suario  logueado  correctamente ');
 	                	  
-						 window.location.replace("http://localhost:8080/Manzana/crear_proyecto.html");
+						 var datoslog = {
+									"correo" : data.correo,
+									"contrasena" : data.contrasena,
+								//saveAddall
+
+								};
+
+						 
+						// window.location.replace("http://localhost:8080/Manzana/dashboardNuevo.html");
+						 
+						
+						 
+						 
+						 
 						}
 
 				},

@@ -7,11 +7,9 @@ import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonObject;
 import com.mysql.jdbc.Connection;
@@ -21,16 +19,16 @@ import com.mysql.jdbc.Statement;
 import Clases.JSONPost;
 
 /**
- * Servlet implementation class BuscarUsuario
+ * Servlet implementation class BuscarProyecto
  */
-@WebServlet("/Loguear")
-public class Loguear extends HttpServlet {
+@WebServlet("/BuscarProyecto")
+public class BuscarProyecto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Loguear() {
+    public BuscarProyecto() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,31 +36,27 @@ public class Loguear extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-    
-    String usuariof  ="";
-    String  correof="";
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		 response.setContentType("application/json");
 			
-			String jsonResult = "{\"correo\":\"error\",\"contrasena\":\"error\"}";  //status:
-			  HttpSession session = request.getSession();
+			String jsonResult = "{\"id\":\"error\",\"nombre\":\"unknown\"}";  //status:
+			
 			Connection con = conectarAMySQL();
 			if(con != null)
 			{
 				//System.out.println("Estoy conectado");
 				
-				//JsonObject jo = JSONPost.getJsonObject(request.getReader());
-				//String correo=jo.get("correo").getAsString();
-				//String contrasena=jo.get("contrasena").getAsString();
-               
-				String user = request.getParameter("correologin"); 
-				String pwd = request.getParameter("contrasenalogin");
+				JsonObject jo = JSONPost.getJsonObject(request.getReader());
+				String correoc=jo.get("correo").getAsString();
+
 				
-				System.out.println(user);
+				//
+				
+				System.out.println(correoc);
 				//System.out.println(contenido);
 				
-				String query = "select * from usuarios where correo='"+user+"' && contrasena='"+pwd+"'";
+				String query = "select * from usuarios where correo LIKE   '%"+correoc+"%' ";
 				System.out.println(query);
 				
 				try {
@@ -84,53 +78,46 @@ public class Loguear extends HttpServlet {
 					ResultSet rs = (ResultSet) stmt.executeQuery(query);
 					System.out.println(rs);
 					if(rs.next())
-					{  
+					{
 						
+						
+	                     String rsid= rs.getString("id_usuario");
+						
+
 						String rsnombre = rs.getString("nombre");
-						String rsCorreo = rs.getString("correo");
-						String rsContrasena = rs.getString("contrasena");
+						String rscorreo = rs.getString("correo");
+
+					
 						
-						usuariof =rsnombre;
 						
-					correof  = rsCorreo;
+
+						//String rscorreo = rs.getString("correo");
 						
-						System.out.println(usuariof);
+						
 						
 					 jsonResult = "{" + 
-							                "\"correo\":\"" + rsCorreo +"\"" + ","+
-							                "\"contrasena\":\"" + rsContrasena +"\"" +
-		
+							                "\"result\":\"" + 1 +"\"" + ","+
+							                "\"correo\":\"" + rscorreo +"\"" +
+							            //  "\"result\":\"" +1 +"\"" +
 							                "}";
 					 
-					 Cookie loginCookie = new Cookie("user",usuariof);
-						//setting cookie to expiry in 30 mins
-						loginCookie.setMaxAge(30*60);
-						response.addCookie(loginCookie);
-						response.sendRedirect("dashboardNuevo.jsp");
-						
-					
 					}
 					
 					else
 						
-						
-						
 					{
-						System.out.println("esta  correcto");
-						session.setAttribute("getAlert", "uuario  no   existe o el correo es  incorrecto");
-					     
-						response.sendRedirect("pruebas.jsp");
 						
+						
+						 jsonResult = "{" + 
+					                
+					                "\"result\":\"" +  0  +"\"" +
+					                "}";
+			
 						
 					}
-					 //System.out.println(jsonResult);
 					
-					
-					//Escribir el JSON
+					 System.out.println(jsonResult);
 					con.close();
-				    
-				    
-				   
 					
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -141,10 +128,11 @@ public class Loguear extends HttpServlet {
 			}
 			
 			 
-			
-			
-			
-	
+			//Escribir el JSON
+			try(PrintWriter out = response.getWriter()){
+				//out.print("{\"dato\": \"No que no entrabas\"}");
+				out.print(jsonResult);
+			}
 	}
 	
 	 public Connection conectarAMySQL()

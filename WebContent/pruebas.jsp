@@ -9,7 +9,24 @@
 <title>Login</title>
 
 </head>
+<%
+session.setMaxInactiveInterval(2);
+%>
 
+ <script type="text/javascript">
+var Msg ='<%=session.getAttribute("getAlert")%>';
+
+console.log("mensaje",Msg);
+
+
+    if (Msg != "null") {
+    	
+    	alert("  el usuario no  existe ");
+ function alertName(){
+ alert("  el usuario no  existe ");
+ } 
+ }
+ </script> 
 
 <body>
 
@@ -72,13 +89,13 @@
 	<br>
 
 	<div class="container">
-		<form>
+		<form   action="Loguear" method="post"   >
 		
 		
 			<div class="form-group row">
 				<label for="inputNombreProyecto" class="col-sm-2 col-form-label">Correo:</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="correologin"
+					<input type="text" class="form-control"  name="correologin"
 						placeholder="Ingresa tu correo">
 				</div>
 			</div>
@@ -86,7 +103,7 @@
 			<div class="form-group row">
 				<label for="inputNombreProyecto" class="col-sm-2 col-form-label">Contrasena:</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="contrasenalogin"
+					<input type="password" class="form-control" name="contrasenalogin"
 						placeholder="Ingresa tu contrasena">
 				</div>
 			</div>
@@ -97,11 +114,15 @@
 			<div class="casa">
 				<div class="form-group row"display: "inline-block">
 					<div class="col-sm-12">
-						<button id="login-user" type="button" class="btn btn-mio"
+					   <button id="login-use" type="submit" class="btn btn-mio" 
+						
+						
 							font-size='8px' ; style='width: 140px; height: 80px'
-							data-toggle="modal" data-target="#myModal">Login</button>
+							data-toggle="modal" data-target="#myModal">Login</button> 
+							
+							
 					</div>
-				</div>
+				</form>
 			</div6>		
 		
 		
@@ -127,6 +148,8 @@
 					<input type="password" class="form-control" id="contrasena"
 						placeholder="Registra tu contrasena">
 				</div>
+				
+				</form>
 			</div>
 
 
