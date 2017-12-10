@@ -3,7 +3,10 @@ var act= 1;
 $(document).ready(function(){//Entra hasta que la pagina se cargó
 
     var arregloDeObjetos = [];//Guardar registros del formulario
-
+	var correo = $("h3").text();
+    
+    $("h3").hide();
+    
     $("span#add") //Selector
     .on( 
         "click",         //Evento a manejar
@@ -88,20 +91,22 @@ $(document).ready(function(){//Entra hasta que la pagina se cargó
   	            	   
   	            	   
   	            	   
-  	                    if((data.result==1    &&   data.correo==textos[x])  || data.result==0  )
-  	                    	{
+  	             if((data.result==1    &&   data.correo==textos[x])  || data.result==0  )
+  	                 	
+  	             {
   	                   
   	                    	
   	  	                
   	  	            console.log("el usuario buscado no existe o  ya ah sido agregado anteriormente");
               		alert("Id de usuario no existe");
+              		
               		$("input#inputNombreMiembro").val("");
               		
               		act=0;
   	  	            break;
   	  	            
   	  	            
-  	                    	}
+  	                    }
   	            	   } 
   	                    if(act==1)	
   	               
@@ -171,7 +176,13 @@ $(document).ready(function(){//Entra hasta que la pagina se cargó
 
             var saveAddall = $("textarea#exampleFormControlTextarea2").val(); //Estamos apuntando al textarea. Devuelve un string
             saveAddall =  $.trim(saveAddall); //Función trim sirve para recortar espacios al inicio y al fin de la cadena.
-
+            
+            var correou =  $("h3").text();//Estamos apuntando al textarea. Devuelve un string
+            correou =  $.trim(correou); //Función trim sirve para recortar espacios al inicio y al fin de la cadena.
+            
+            
+            
+            
             if(saveName !== "" && saveDesc !== "" && saveStart !== "" && saveEnd !== "" && saveAddall !== "")
             {
                 console.log(saveName);
@@ -188,7 +199,9 @@ $(document).ready(function(){//Entra hasta que la pagina se cargó
     					"fechainicio": saveStart,
     					"fechafin": saveEnd,
     					"estado": "1",
-    					"miembros": saveAddall
+    					"miembros": saveAddall,
+    					"usuario": correou
+    					
     			
     			};
     			
@@ -228,7 +241,7 @@ $(document).ready(function(){//Entra hasta que la pagina se cargó
 	                success: function(data, textStatus, jqXHR) {
 	                    console.log("Si el acceso al servlet fue correcto");
 	                    console.log(data); //data.dato
-	                    
+	                   
 	                    
 	                },
 	                error: function(jqXHR, textStatus, errorThrown) {
@@ -263,7 +276,7 @@ $(document).ready(function(){//Entra hasta que la pagina se cargó
             }
             
 
-    		
+           // window.location.replace("http://localhost:8080/Manzana/dashboardNuevo.jsp");
     		
     		
     		

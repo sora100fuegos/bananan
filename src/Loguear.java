@@ -48,6 +48,8 @@ public class Loguear extends HttpServlet {
 			String jsonResult = "{\"correo\":\"error\",\"contrasena\":\"error\"}";  //status:
 			  HttpSession session = request.getSession();
 			Connection con = conectarAMySQL();
+			
+			
 			if(con != null)
 			{
 				//System.out.println("Estoy conectado");
@@ -103,9 +105,23 @@ public class Loguear extends HttpServlet {
 							                "}";
 					 
 					 Cookie loginCookie = new Cookie("user",usuariof);
+					 
+					 
+					 Cookie loginCookie2 = new Cookie("mail",correof);
+					 
+					 
+					
 						//setting cookie to expiry in 30 mins
 						loginCookie.setMaxAge(30*60);
 						response.addCookie(loginCookie);
+						
+						
+						
+						loginCookie2.setMaxAge(30*60);
+						response.addCookie(loginCookie2);
+						
+						
+						
 						response.sendRedirect("dashboardNuevo.jsp");
 						
 					
@@ -119,7 +135,7 @@ public class Loguear extends HttpServlet {
 						System.out.println("esta  correcto");
 						session.setAttribute("getAlert", "uuario  no   existe o el correo es  incorrecto");
 					     
-						response.sendRedirect("pruebas.jsp");
+						response.sendRedirect("pruebas1.jsp");
 						
 						
 					}

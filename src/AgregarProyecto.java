@@ -55,8 +55,9 @@ public class AgregarProyecto extends HttpServlet {
 			String fechafin = jo.get("fechafin").getAsString();
 			int estado = jo.get("estado").getAsInt();
 			String miembros = jo.get("miembros").getAsString();
+			String correouser  =  jo.get("usuario").getAsString();
 			
-			
+			System.out.println("el   correo del encargado del  proyecto es"+correouser);
 			
 			
 			System.out.println(nombreproyecto);
@@ -72,7 +73,7 @@ public class AgregarProyecto extends HttpServlet {
 		    
 		    
 			
-			String query = "INSERT INTO proyecto(nombreproyecto,descripcion,fechainicio,fechafin,estado,miembros) VALUES('" + nombreproyecto + "', '"+ descripcion +"', '"+ fechainicio +"', '"+fechafin+"', '"+estado+"', '"+miembros+"')";
+			String query = "INSERT INTO proyecto(nombreproyecto,descripcion,fechainicio,fechafin,estado,miembros,lider_proyecto) VALUES('" + nombreproyecto + "', '"+ descripcion +"', '"+ fechainicio +"', '"+fechafin+"', '"+estado+"', '"+miembros+"',   '"+correouser+"'   )";
 			System.out.println(query);
 			
 			try {
@@ -99,7 +100,7 @@ public class AgregarProyecto extends HttpServlet {
 				String fechainiProyecto = "";
 				String fechafinProyecto = "";
 				int estadoProyecto = 0;
-				int miembrosProyecto = 0;
+				String miembrosProyecto = "";
 				
 				while(rs.next())
 				{   
@@ -109,7 +110,7 @@ public class AgregarProyecto extends HttpServlet {
 					fechainiProyecto = rs.getString("fechainicio");
 					fechafinProyecto = rs.getString("fechafin");
 					estadoProyecto = rs.getInt("estado");
-					miembrosProyecto = rs.getInt("miembros");
+					miembrosProyecto = rs.getString("miembros");
 				}
 				
 				 jsonResult = "{" + 

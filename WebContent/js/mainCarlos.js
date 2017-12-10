@@ -84,7 +84,7 @@ $(document).ready(function() {//Entra hasta que la pagina se cargó
 
 	}); //Funcion para manejar un evento
 
-	$("button#login-user")
+	$("button#login-usell")
 	//Selector
 	.on("click", //Evento a manejar
 	function(event) {

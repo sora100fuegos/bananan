@@ -118,7 +118,7 @@ if(userName == null) response.sendRedirect("pruebas.html");
                     <!--Inicio div ventana de agregar-->
                     <div class="col-lg-4">
                         <div id="agregarNuevo">
-                            <p>Agregar Proyecto</p>
+                            <p>asignar tarea </p>
                             <br> <br> <br>
                             <a href="http://localhost:8080/Manzana/crear_proyecto.jsp">
                                 <i class="fa fa-plus-circle fa-5x" aria-hidden="true"></i>

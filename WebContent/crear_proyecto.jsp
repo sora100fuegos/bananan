@@ -1,15 +1,60 @@
+<%@ page language="java" contentType="text/html; charset=US-ASCII"
+    pageEncoding="US-ASCII"%>
+    
+    
 <!DOCTYPE html>
 <html lang="es">
+
+
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="css/styleBanana.css">
-<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">-->
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<script src="https://use.fontawesome.com/4f360dff2c.js"></script>
-<title>Crear Proyecto</title>
+   <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/styleBanana.css">
+   <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">-->
+   <link rel="stylesheet" href="css/bootstrap.min.css">
+   <script src="https://use.fontawesome.com/4f360dff2c.js"></script>
+   <title>Crear Proyecto</title>
 
 </head>
+
+
+
 <body>
+
+
+ <%
+String userName = null;
+    
+    String userMail = null;
+Cookie[] cookies = request.getCookies();
+if(cookies !=null){
+for(Cookie cookie : cookies){
+	if(cookie.getName().equals("user")) 
+	{
+		
+		userName = cookie.getValue();
+	 
+	     
+}
+
+if(cookie.getName().equals("mail")) 
+	
+{
+	userMail = cookie.getValue();
+ 
+     
+}
+
+
+
+}
+
+}
+if(userName == null) response.sendRedirect("pruebas.html");
+%>
+
+<h3><%=userMail %></h3>
+
+
 	<!--<nav class="navbar navbar-light bg-light">
             <form class="form-inline">
                 <div class="nav-link" href="#"><i class="fa fa-home fa-3x"  aria-hidden="true" ></i> </div>
@@ -71,8 +116,8 @@
 				<!--Inicio div icono user-->
 				<div class="col-lg-2">
 					<a href="#">
-						<div class="nav-link" href="#">
-							<i class="fa fa-user fa-3x" aria-hidden="true"></i>
+						<div   id ="nom" class="nav-link" href="#">
+							<i class="fa fa-user fa-3x" aria-hidden="true">   <%=userName %></i>
 						</div>
 					</a>
 				</div>
@@ -95,10 +140,10 @@
 			</div>
 			<div class="form-group row">
 				<label for="exampleFormControlTextarea1"
-					class="col-sm-2 col-form-label">Descripción:</label>
+					class="col-sm-2 col-form-label">DescripciÃ³n:</label>
 				<div class="col-sm-10">
 					<textarea class="form-control" id="exampleFormControlTextarea1"
-						rows="10" placeholder="Añadir texto"></textarea>
+						rows="10" placeholder="AÃ±adir texto"></textarea>
 				</div>
 			</div>
 
@@ -111,7 +156,7 @@
 					class="form-control" id="inputStartDate" value="2017/11/12">
 				</div2>
 				<label class="col-sm-2 col-form-label" for="endDate">Fecha
-					de Término:</label>
+					de TÃ©rmino:</label>
 				<div4 class="col-sm-4"> <input type="date"
 					class="form-control" id="inputEndDate" value="2017/12/12">
 				</div4>
@@ -149,7 +194,7 @@
 
 
 
-			<!--Aquí iba el Modal-->
+			<!--AquÃ­ iba el Modal-->
 
 
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
